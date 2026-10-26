@@ -1,11 +1,29 @@
 ---
 title: "my_penguins"
+author: "Jose Monterrosa jdm9659"
 ---
 
-## Quarto
+```{r}
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+library(tidyverse)
+library(palmerpenguins)
+```
 
 ```{r}
-1 + 1
+glimpse(penguins)
+summary(penguins$bill_length_mm)
 ```
+
+```{r}
+penguins |>
+  group_by(species) |>
+  summarize(avg_bill_length = mean(bill_length_mm,na.rm=TRUE)) |>
+  ggplot(aes(x = species, y = avg_bill_length, fill = species)) +
+  geom_col() +
+  labs(
+    title = "Average Bill Length by Penguin Species",
+    x = "Species",
+    y = "Average Bill Length (mm)"
+  )
+```
+
